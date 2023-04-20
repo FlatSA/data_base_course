@@ -1,4 +1,5 @@
-create or replace procedure chk_tot(varchar(10))
+create or replace function chk_tot(varchar(10)) 
+returns money
 as $$
 declare cnt money;
 begin
@@ -12,6 +13,8 @@ begin
 			set status = 'малый объем заказов'
 			where cust_num = $1;
 	end if;	
+
+	return cnt;
 end;
 $$
 language plpgsql;
